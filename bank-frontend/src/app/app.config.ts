@@ -17,6 +17,7 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
-    importProvidersFrom(FormsModule)
+    importProvidersFrom(FormsModule),
+    provideRouter(routes)
   ]
 };
