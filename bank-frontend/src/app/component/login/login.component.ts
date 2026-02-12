@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
+  styleUrls:['./login.component.css'],
   imports: [FormsModule]
 })
 export class LoginComponent {
@@ -18,11 +19,12 @@ export class LoginComponent {
   constructor(private auth: AuthService, private router: Router) {}
 
   login() {
-    console.log("Login clicked");  // 👈 add this
+    console.log("Login clicked");
 
     this.auth.login(this.username, this.password).subscribe({
       next: () => {
-        this.router.navigate(['/accounts']);
+        // this.router.navigate(['/accounts']); works
+        this.router.navigate(['/dashboard']);
       },
       error: () => {
         this.error = "Invalid credentials";

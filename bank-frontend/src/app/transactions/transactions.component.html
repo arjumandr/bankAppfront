@@ -1,0 +1,97 @@
+<div class="transactions-container">
+  <h2>Transactions</h2>
+  <p>Select an operation below:</p>
+
+  <!-- Operation selection -->
+  <div class="operation-buttons">
+    <button (click)="selectOperation('deposit')">Deposit</button>
+    <button (click)="selectOperation('withdraw')">Withdraw</button>
+    <button (click)="selectOperation('transfer')">Transfer</button>
+  </div>
+
+  <!-- Deposit Form -->
+    <form *ngIf="selectedOperation === 'deposit'" (ngSubmit)="submitDeposit()">
+    <h3>Deposit Funds</h3>
+    <p>Enter the account ID, amount to deposit, and the clerk ID.</p>
+
+    <label>
+        Account ID:
+        <input type="number" placeholder="Enter account ID" [(ngModel)]="depositWithdrawData.accountId" name="depositAccountId" required>
+    </label>
+
+    <label>
+        Amount:
+        <input type="number" placeholder="Enter amount" [(ngModel)]="depositWithdrawData.amount" name="depositAmount" required>
+    </label>
+
+    <label>
+        Clerk ID:
+        <input type="number" placeholder="Enter clerk ID" [(ngModel)]="depositWithdrawData.clerkId" name="depositClerkId" required>
+    </label>
+
+    <button type="submit">Submit Deposit</button>
+    </form>
+
+    <!-- Withdraw Form -->
+    <form *ngIf="selectedOperation === 'withdraw'" (ngSubmit)="submitWithdraw()">
+    <h3>Withdraw Funds</h3>
+    <p>Enter the account ID, amount to withdraw, and the clerk ID.</p>
+
+    <label>
+        Account ID:
+        <input type="number" placeholder="Enter account ID" [(ngModel)]="depositWithdrawData.accountId" name="withdrawAccountId" required>
+    </label>
+
+    <label>
+        Amount:
+        <input type="number" placeholder="Enter amount" [(ngModel)]="depositWithdrawData.amount" name="withdrawAmount" required>
+    </label>
+
+    <label>
+        Clerk ID:
+        <input type="number" placeholder="Enter clerk ID" [(ngModel)]="depositWithdrawData.clerkId" name="withdrawClerkId" required>
+    </label>
+
+    <button type="submit">Submit Withdraw</button>
+    </form>
+
+
+  <!-- Transfer Form -->
+  <form *ngIf="selectedOperation === 'transfer'" (ngSubmit)="submitTransfer()">
+    <h3>Transfer Funds</h3>
+    <p>Enter source and destination account IDs, amount, and clerk ID handling the transfer.</p>
+
+    <label>
+      From Account ID:
+      <input type="number" placeholder="Enter source account ID" [(ngModel)]="transferData.fromAccId" name="fromAccId" required>
+    </label>
+
+    <label>
+      To Account ID:
+      <input type="number" placeholder="Enter destination account ID" [(ngModel)]="transferData.toAccId" name="toAccId" required>
+    </label>
+
+    <label>
+      Amount:
+      <input type="number" placeholder="Enter amount" [(ngModel)]="transferData.amount" name="transferAmount" required>
+    </label>
+
+    <label>
+      Clerk ID:
+      <input type="number" placeholder="Enter clerk ID" [(ngModel)]="transferData.clerkId" name="transferClerkId" required>
+    </label>
+
+    <button type="submit">Submit Transfer</button>
+  </form>
+
+  <!-- Result / Error -->
+  <div *ngIf="result" class="result">
+    <h4>Transaction Successful:</h4>
+    <pre>{{ result | json }}</pre>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <h4>Error:</h4>
+    <p>{{ error }}</p>
+  </div>
+</div>

@@ -1,1 +1,33 @@
-<p>accounts works!</p>
+<h2 style="margin-bottom:20px;">Account Management</h2>
+
+<hr>
+
+<h3>Create New Account</h3>
+
+<div style="margin-bottom:20px;">
+  <input [(ngModel)]="newAccount.name" placeholder="Account Holder Name">
+  <input [(ngModel)]="newAccount.balance" type="number" placeholder="Balance">
+  <button (click)="createAccount()">Create</button>
+</div>
+
+<hr>
+
+<h3>All Accounts</h3>
+
+<table border="1" cellpadding="8" style="margin-top:15px; border-collapse: collapse;">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Balance</th>
+    <th>Action</th>
+  </tr>
+
+  <tr *ngFor="let acc of accounts">
+    <td>{{acc.id}}</td>
+    <td>{{acc.name}}</td>
+    <td>{{acc.balance}}</td>
+    <td>
+      <button (click)="deleteAccount(acc.id)">Delete</button>
+    </td>
+  </tr>
+</table>
