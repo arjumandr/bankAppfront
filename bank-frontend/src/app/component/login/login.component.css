@@ -1,39 +1,59 @@
-/* Center everything vertically and horizontally */
-:host {
+/* Full page container */
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background: linear-gradient(135deg, #6c63ff, #00bcd4);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f2f5;
 }
 
 /* Header */
-h2 {
-  margin-bottom: 1.5rem;
+header h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+/* Login box */
+.login-box {
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 320px;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 0.5rem;
   color: #333;
 }
 
-/* Form styling */
-form {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  align-items: stretch;
+.login-box p {
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
 }
 
-/* Inputs */
+/* Form labels & inputs */
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  text-align: left;
+  color: #333;
+  font-weight: 500;
+}
+
 input[type="text"],
 input[type="password"] {
-  padding: 0.6rem 1rem;
-  margin-bottom: 1rem;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s;
 }
@@ -41,29 +61,43 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="password"]:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #6c63ff;
 }
 
-/* Submit button */
+/* Button */
 button {
-  padding: 0.6rem 1rem;
+  width: 100%;
+  padding: 0.7rem 0;
+  margin-top: 0.5rem;
   border: none;
   border-radius: 8px;
-  background: #007bff;
+  background-color: #6c63ff;
   color: white;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-button:hover {
-  background: #0056b3;
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-/* Error message */
-p {
+button:hover:not(:disabled) {
+  background-color: #5750d1;
+}
+
+/* Validation & error messages */
+.validation-error {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.error-message {
   margin-top: 1rem;
-  color: red;
+  color: #d93025;
   font-weight: 500;
-  text-align: center;
 }

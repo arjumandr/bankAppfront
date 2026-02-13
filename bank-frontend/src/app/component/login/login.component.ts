@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; // <-- import this
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls:['./login.component.css'],
-  imports: [FormsModule]
+  imports: [FormsModule, CommonModule]
 })
 export class LoginComponent {
 
@@ -19,6 +21,10 @@ export class LoginComponent {
   constructor(private auth: AuthService, private router: Router) {}
 
   login() {
+    if (!this.username || !this.password) {
+      this.error = 'Username and password cannot be empty';
+      return;
+    }
     console.log("Login clicked");
 
     this.auth.login(this.username, this.password).subscribe({

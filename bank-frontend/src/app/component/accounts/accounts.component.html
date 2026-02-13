@@ -1,18 +1,59 @@
 <h2 style="margin-bottom:20px;">Account Management</h2>
 
 <hr>
-
 <h3>Create New Account</h3>
 
-<div style="margin-bottom:20px;">
-  <input [(ngModel)]="newAccount.name" placeholder="Account Holder Name">
-  <input [(ngModel)]="newAccount.balance" type="number" placeholder="Balance">
-  <button (click)="createAccount()">Create</button>
-</div>
+<form #accountForm="ngForm" (ngSubmit)="createAccount(accountForm)" class="account-form">
+  <div class="form-row-wrapper">
+    <div class="form-row">
+      <label for="name">Account Holder Name</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter account holder name"
+        [(ngModel)]="newAccount.name"
+        name="name"
+        required
+        #nameField="ngModel"
+      />
+      <div class="validation-error" *ngIf="nameField.invalid && nameField.touched">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label for="balance">Balance</label>
+      <input
+        type="number"
+        id="balance"
+        placeholder="Enter initial balance"
+        [(ngModel)]="newAccount.balance"
+        name="balance"
+        required
+        min="1"
+        #balanceField="ngModel"
+      />
+      <div class="validation-error" *ngIf="balanceField.invalid && balanceField.touched">
+        Balance must be greater than 0.
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="accountForm.invalid">Create Account</button>
+</form>
 
 <hr>
 
 <h3>All Accounts</h3>
+
+<div style="margin-bottom: 10px;">
+  <input 
+    type="text" 
+    placeholder="Search by name or ID..." 
+    [(ngModel)]="searchTerm"
+    style="padding: 8px; width: 100%; max-width: 300px;"
+  />
+</div>
 
 <table border="1" cellpadding="8" style="margin-top:15px; border-collapse: collapse;">
   <tr>
@@ -22,7 +63,7 @@
     <th>Action</th>
   </tr>
 
-  <tr *ngFor="let acc of accounts">
+  <tr *ngFor="let acc of filteredAccounts">
     <td>{{acc.id}}</td>
     <td>{{acc.name}}</td>
     <td>{{acc.balance}}</td>
@@ -31,3 +72,5 @@
     </td>
   </tr>
 </table>
+
+<p *ngIf="filteredAccounts.length === 0">No accounts found.</p>

@@ -40,4 +40,12 @@ export class TransactionService {
       headers: this.authService.getAuthHeader()
     });
   }
+  // =======================
+  // 🔎 GET TRANSACTIONS BY ACCOUNT ID
+  // =======================
+  getTransactionsByAccountId(id: number) {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/accounts/${id}/getTransaction`
+    );
+  }
 }

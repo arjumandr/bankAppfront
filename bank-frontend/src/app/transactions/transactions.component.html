@@ -1,3 +1,4 @@
+<div class="page-wrapper">
 <div class="transactions-container">
   <h2>Transactions</h2>
   <p>Select an operation below:</p>
@@ -85,13 +86,83 @@
   </form>
 
   <!-- Result / Error -->
-  <div *ngIf="result" class="result">
+  <!-- <div *ngIf="result" class="result">
     <h4>Transaction Successful:</h4>
     <pre>{{ result | json }}</pre>
+  </div> -->
+  
+  <div *ngIf="result" class="success-receipt">
+  <div class="receipt-header">
+    <div class="check-icon">✓</div>
+    <h4>Transaction Successful</h4>
   </div>
+
+  <div class="receipt-body">
+    <div class="receipt-row">
+      <span>Transaction ID</span>
+      <strong>#{{ result.transactionId }}</strong>
+    </div>
+    <div class="receipt-row">
+      <span>Type</span>
+      <span class="badge">{{ result.transactionType }}</span>
+    </div>
+    <div class="receipt-row">
+      <span>Amount</span>
+      <!-- <strong class="amount-text">{{ result.amount | currency:'INR' }}</strong> -->
+       <strong class="amount-text">₹{{ result.amount }}</strong>
+    </div>
+    <div class="receipt-row">
+      <span>Date</span>
+      <span>{{ result.date | date:'medium' }}</span>
+    </div>
+    <div class="receipt-row">
+      <span>Status</span>
+      <span class="status-approved">{{ result.status }}</span>
+    </div>
+    <hr>
+    <div class="receipt-footer">
+      <p>Account ID: {{ result.accountId }} | Clerk ID: {{ result.clerkId }}</p>
+    </div>
+  </div>
+  
+  <button class="btn-secondary" (click)="result = null">Done</button>
+</div>
 
   <div *ngIf="error" class="error">
     <h4>Error:</h4>
     <p>{{ error }}</p>
   </div>
+
+  <!-- ======================= -->
+<!-- 🔎 SEARCH TRANSACTIONS -->
+<!-- ======================= -->
+
+<hr class="divider">
+
+<div class="search-section">
+  <h3>Search Transactions by Account ID</h3>
+
+  <div class="search-box">
+    <input 
+      type="number"
+      placeholder="Enter account ID"
+      [(ngModel)]="searchAccId"
+      name="searchAccId">
+
+    <button (click)="fetchTransactions()">Search</button>
+  </div>
+</div>
+
+<!-- Transaction List Result -->
+<div *ngIf="transactionHistory?.length" class="history-section">
+  <h3>Transaction History</h3>
+
+  <div class="history-card" *ngFor="let tx of transactionHistory">
+    <div><strong>ID:</strong> {{ tx.transactionId }}</div>
+    <div><strong>Type:</strong> {{ tx.transactionType }}</div>
+    <div><strong>Amount:</strong> ₹{{ tx.amount }}</div>
+    <div><strong>Date:</strong> {{ tx.date | date:'medium' }}</div>
+  </div>
+</div>
+</div>
 </div>

@@ -33,6 +33,12 @@ export class TransactionsComponent {
   result: any;
   error: string = '';
 
+  // =======================
+  // 🔎 SEARCH FEATURE STATE
+  // =======================
+  searchAccId: number = 0;
+  transactionHistory: any[] = [];
+
   constructor(private transactionService: TransactionService) {}
 
   selectOperation(op: 'transfer' | 'deposit' | 'withdraw') {
@@ -64,7 +70,38 @@ export class TransactionsComponent {
     this.transactionService.transfer(this.transferData)
       .subscribe({
         next: res => this.result = res,
-        error: err => this.error = err.message || 'Something went wrong'
+        error: (err) => {
+          this.error = err.message || 'Something went wrong';
+          if (err.error?.message) {
+            this.error = err.error.message;
+          } else if (typeof err.error === 'string') {
+            this.error = err.error;
+          } else {
+            this.error = "Transfer failed";
+          }
+        }
       });
   }
+  // =======================
+    // 🔎 FETCH TRANSACTIONS
+    // =======================
+    fetchTransactions() {
+      if (!this.searchAccId) {
+        this.error = 'Please enter a valid Account ID';
+        return;
+      }
+
+      this.transactionService
+        .getTransactionsByAccountId(this.searchAccId)
+        .subscribe({
+          next: (data) => {
+            this.transactionHistory = data;
+            this.error = '';
+          },
+          error: (err) => {
+            this.transactionHistory = [];
+            this.error = 'No transactions found for this Account ID';
+          }
+        });
+    }
 }

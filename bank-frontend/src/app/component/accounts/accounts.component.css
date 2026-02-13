@@ -5,17 +5,16 @@
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 2rem;
-  background: #f7f8fa;
 }
 
 /* Headings */
 h2 {
-  color: #333;
+  color: white;
   margin-bottom: 1rem;
 }
 
 h3 {
-  color: #555;
+  color: whitesmoke;
   margin-bottom: 0.5rem;
 }
 
@@ -29,39 +28,85 @@ hr {
 }
 
 /* Create account form */
-div[style*="margin-bottom:20px"] {
+.account-form {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
 }
 
-div[style*="margin-bottom:20px"] input {
-  padding: 0.5rem 0.8rem;
+/* Wrapper for side-by-side form rows */
+.form-row-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* wraps on small screens */
+}
+
+/* Each input column */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* take equal width */
+  min-width: 200px; /* ensures inputs don’t get too small on mobile */
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 0.6rem 0.8rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
-  width: 200px;
   transition: border-color 0.3s;
 }
 
-div[style*="margin-bottom:20px"] input:focus {
+input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #6c63ff;
 }
 
-div[style*="margin-bottom:20px"] button {
-  padding: 0.6rem 1.2rem;
+button {
+  padding: 0.7rem 0;
   border: none;
   border-radius: 8px;
-  background-color: #28a745;
+  background-color: #6c63ff;
   color: white;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-div[style*="margin-bottom:20px"] button:hover {
-  background-color: #1e7e34;
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #5750d1;
+}
+
+.validation-error {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 1.5rem 0;
 }
 
 /* Table styling */
