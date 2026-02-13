@@ -13,11 +13,11 @@ export class DashboardComponent {
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  // logout() {
-  //   // Remove token (recommended instead of clearing everything)
-  //   localStorage.removeItem('token'); 
+  logout() {
+    // Remove token (recommended instead of clearing everything)
+    localStorage.removeItem('token'); 
     
-  //   // Navigate to login page
-  //   this.router.navigate(['/']);
-  // }
+    // Navigate to login page
+    this.router.navigate(['/']);
+  }
 }
